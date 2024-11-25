@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Text checker</title>
+        <script>
+            function listSentences() {
+                let elem = document.createElement('li');
+                let text = document.getElementById('text').value;
+                let sentences = text.split(/(?<=[\.\?])\s+/g);
+                let lengths = sentences.map(sentence => [sentence?.match(/\s+/g)?.length ?? 0, sentence]);
+                lengths.sort(([a], [b]) => b - a);
+                let elems = lengths.map(([wordCount, sentence]) => {
+                    let elem = document.createElement('li');
+                    elem.innerHTML = wordCount + " words:<br>" + sentence;
+                    return elem;
+                })
+                document.getElementById('sentences').replaceChildren(...elems);
+            }
+        </script>
+    </head>
+    <body>
+        <textarea id="text" rows="30"
+            style="box-sizing:border-box; width:100%"
+            oninput="listSentences()"></textarea>
+        <ul id="sentences"></ul>
+    </body>
+</html>
