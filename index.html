@@ -7,7 +7,7 @@
                 let elem = document.createElement('li');
                 let text = document.getElementById('text').value;
                 let sentences = text.split(/(?<=[\.\?])\s+/g);
-                let lengths = sentences.map(sentence => [sentence?.match(/\s+/g)?.length ?? 0, sentence]);
+                let lengths = sentences.map(sentence => [(sentence?.match(/\s+/g)?.length ?? 0) + 1, sentence]);
                 lengths.sort(([a], [b]) => b - a);
                 let elems = lengths.map(([wordCount, sentence]) => {
                     let elem = document.createElement('li');
